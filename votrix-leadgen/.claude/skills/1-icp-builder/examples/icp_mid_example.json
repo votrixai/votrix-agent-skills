@@ -1,0 +1,28 @@
+{
+  "company_scale": "mid",
+  "industries": ["Financial Services", "Insurance", "Banking"],
+  "employee_range": { "min": 500, "max": 2000 },
+  "revenue_range": { "min": "$50M", "max": "$500M" },
+  "personas": [
+    {
+      "title_patterns": ["CTO", "VP of Engineering", "Head of Technology"],
+      "seniority": ["c_suite", "vp"],
+      "departments": ["engineering", "technology"]
+    },
+    {
+      "title_patterns": ["CISO", "VP of Security", "Head of Information Security"],
+      "seniority": ["c_suite", "vp"],
+      "departments": ["security", "IT"]
+    }
+  ],
+  "geo": {
+    "countries": ["United States", "United Kingdom", "Canada"]
+  },
+  "technologies": ["AWS", "Azure", "Kubernetes"],
+  "exclusions": {
+    "companies": [],
+    "domains": [],
+    "industries": ["Government", "Defense"]
+  },
+  "lead_volume_target": 75
+}

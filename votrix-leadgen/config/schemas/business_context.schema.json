@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Business Context",
+  "description": "Captures the user's business, product, and outreach goals for lead generation",
+  "type": "object",
+  "required": ["company_name", "product_description", "value_proposition", "target_customer_description", "outreach_goal", "campaign_name"],
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "description": "Name of the user's company"
+    },
+    "product_description": {
+      "type": "string",
+      "description": "What the product/service does (2-3 sentences)"
+    },
+    "value_proposition": {
+      "type": "string",
+      "description": "Core value proposition — why customers buy"
+    },
+    "target_customer_description": {
+      "type": "string",
+      "description": "Free-text description of who the ideal customer is"
+    },
+    "pain_points_solved": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of pain points the product addresses"
+    },
+    "competitors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Known competitors in the space"
+    },
+    "outreach_goal": {
+      "type": "string",
+      "enum": ["demo_booking", "free_trial", "consultation", "partnership", "other"],
+      "description": "Primary goal of the outreach campaign"
+    },
+    "outreach_goal_detail": {
+      "type": "string",
+      "description": "Additional detail if outreach_goal is 'other'"
+    },
+    "campaign_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Slug-style campaign name for output directory naming"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any additional context the user wants to provide"
+    }
+  },
+  "additionalProperties": false
+}

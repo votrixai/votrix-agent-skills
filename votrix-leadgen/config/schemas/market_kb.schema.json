@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Market Knowledge Base",
+  "description": "Aggregated market intelligence from web research",
+  "type": "object",
+  "required": ["industry_trends", "competitor_intel", "generated_at"],
+  "properties": {
+    "industry_trends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trend", "relevance", "source"],
+        "properties": {
+          "trend": { "type": "string" },
+          "relevance": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "detail": { "type": "string" },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "competitor_intel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["competitor", "positioning"],
+        "properties": {
+          "competitor": { "type": "string" },
+          "positioning": { "type": "string" },
+          "weaknesses": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "recent_news": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "headline": { "type": "string" },
+                "url": { "type": "string" },
+                "date": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "buying_triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "trigger": { "type": "string" },
+          "signal_type": {
+            "type": "string",
+            "enum": ["hiring", "funding", "expansion", "tech_change", "regulation", "pain_indicator"]
+          },
+          "detection_method": { "type": "string" }
+        }
+      },
+      "description": "Events/signals that indicate buying readiness"
+    },
+    "market_sizing": {
+      "type": "object",
+      "properties": {
+        "tam_estimate": { "type": "string" },
+        "serviceable_segment": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sources_consulted": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

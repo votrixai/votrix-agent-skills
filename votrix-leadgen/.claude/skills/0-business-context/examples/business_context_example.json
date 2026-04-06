@@ -1,0 +1,21 @@
+{
+  "company_name": "Votrix",
+  "product_description": "AI-powered sales intelligence platform that helps B2B teams identify and prioritize their best-fit prospects using real-time buying signals and predictive analytics.",
+  "value_proposition": "Votrix cuts prospecting time by 80% by surfacing the leads most likely to convert, with actionable intelligence for every contact.",
+  "target_customer_description": "B2B SaaS companies with 20-200 employees that have an outbound sales motion and are looking to scale their pipeline without hiring more SDRs.",
+  "pain_points_solved": [
+    "Too much time spent on manual prospect research",
+    "Low response rates from generic cold outreach",
+    "Difficulty identifying which accounts to prioritize",
+    "No visibility into buying signals or intent data",
+    "SDR ramp time is too long"
+  ],
+  "competitors": [
+    "ZoomInfo",
+    "Apollo.io",
+    "Lusha"
+  ],
+  "outreach_goal": "demo_booking",
+  "campaign_name": "q2-saas-push",
+  "notes": "Focus on companies that recently raised Series A/B funding"
+}

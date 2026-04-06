@@ -1,0 +1,20 @@
+# Environment
+.env
+.env.local
+
+# Output
+output/*/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Logs
+*.log
