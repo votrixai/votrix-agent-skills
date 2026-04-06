@@ -99,14 +99,14 @@ All state passes via JSON files in `output/<campaign-name>-<YYYY-MM-DD>/`:
 
 APIs are integrated via MCP (Model Context Protocol) servers configured in `.claude/settings.json`. This eliminates shell scripts — Claude calls MCP tools directly and uses Read/Write for all JSON I/O.
 
-| API | MCP Tool | Purpose | Used By | Credits/Cost |
-|-----|----------|---------|---------|--------------|
-| Apollo.io | *(Bash+curl)* | Lead search & contact data | Skill 3 | ~1 credit/lead |
-| Tavily | `mcp__tavily__search` | Web search for market intel & account research | Skills 2, 5 | ~1 credit/search |
-| Firecrawl | `mcp__firecrawl__scrape` | Web page scraping for deep research | Skills 2, 5 | ~1 credit/page |
-| Proxycurl | `mcp__proxycurl__lookup` | LinkedIn profile enrichment | Skill 5 (Enterprise) | ~1 credit/profile |
+| API | MCP Server | Purpose | Used By | Credits/Cost |
+|-----|------------|---------|---------|--------------|
+| Apollo.io | `composio` | Lead search & contact data | Skill 3 | ~1 credit/lead |
+| Tavily | `tavily` | Web search for market intel & account research | Skills 2, 5 | ~1 credit/search |
+| Firecrawl | `firecrawl` | Web page scraping for deep research | Skills 2, 5 | ~1 credit/page |
+| Proxycurl | `proxycurl` | LinkedIn profile enrichment | Skill 5 (Enterprise) | ~1 credit/profile |
 
-*Apollo uses direct Bash+curl since no official MCP server exists. All other APIs use MCP.*
+All APIs are accessed via MCP — no Bash or shell scripts in the pipeline.
 
 ## Data Handling
 
@@ -139,6 +139,6 @@ votrix-leadgen/
 ## Error Handling
 
 - MCP servers validate API keys at startup — missing keys surface immediately
-- Apollo (Bash+curl) checks for `APOLLO_API_KEY` before making requests
+- Composio handles Apollo authentication via its managed connection
 - Skills validate input JSON against schemas before processing
 - The orchestrator can resume from the last successful step via `pipeline_state.json`

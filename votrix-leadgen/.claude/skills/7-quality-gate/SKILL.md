@@ -6,7 +6,6 @@ argument-hint: "<campaign-dir>"
 allowed-tools:
   - Read
   - Write
-  - Bash
 ---
 
 # Quality Gate & Export (Skill 7)

@@ -6,7 +6,6 @@ argument-hint: "<campaign-dir>"
 allowed-tools:
   - Read
   - Write
-  - Bash
 ---
 
 # Lead Scorer (Skill 4)

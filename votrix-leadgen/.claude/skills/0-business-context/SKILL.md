@@ -6,7 +6,6 @@ argument-hint: "[campaign-name]"
 allowed-tools:
   - Read
   - Write
-  - Bash
   - AskUserQuestion
 ---
 

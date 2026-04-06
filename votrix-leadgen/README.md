@@ -49,7 +49,7 @@ Key outputs:
 
 | Key | Required For | Get It |
 |-----|-------------|--------|
-| `APOLLO_API_KEY` | All modes | [apollo.io](https://www.apollo.io/) |
+| `COMPOSIO_API_KEY` | All modes (Apollo via Composio) | [composio.dev](https://composio.dev/) |
 | `TAVILY_API_KEY` | Mid + Enterprise | [tavily.com](https://tavily.com/) |
 | `FIRECRAWL_API_KEY` | Mid + Enterprise | [firecrawl.dev](https://firecrawl.dev/) |
 | `PROXYCURL_API_KEY` | Enterprise only | [proxycurl.com](https://proxycurl.com/) |

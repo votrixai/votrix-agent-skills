@@ -6,7 +6,6 @@ argument-hint: "<campaign-dir>"
 allowed-tools:
   - Read
   - Write
-  - Bash
   - WebSearch
   - WebFetch
   - mcp__tavily__search
@@ -26,7 +25,7 @@ Builds a market knowledge base by researching industry trends, competitor positi
 
 ## MCP Tools
 
-This skill uses MCP server integrations instead of shell scripts:
+This skill uses MCP server integrations:
 
 - **`mcp__tavily__search`**: Tavily search — pass a query string, receive structured results with titles, URLs, content snippets, and relevance scores
 - **`mcp__firecrawl__scrape`**: Firecrawl scrape — pass a URL, receive markdown content of the page

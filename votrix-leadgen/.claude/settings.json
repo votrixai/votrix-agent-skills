@@ -1,11 +1,11 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(mkdir -p output/*)",
-      "Bash(ls output/*)"
-    ]
+    "allow": []
   },
   "mcpServers": {
+    "composio": {
+      "url": "http://localhost:8000/mcp"
+    },
     "tavily": {
       "command": "npx",
       "args": ["-y", "tavily-mcp@latest"],

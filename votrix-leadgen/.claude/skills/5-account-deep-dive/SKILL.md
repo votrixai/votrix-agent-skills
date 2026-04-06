@@ -6,7 +6,6 @@ argument-hint: "<campaign-dir>"
 allowed-tools:
   - Read
   - Write
-  - Bash
   - WebSearch
   - WebFetch
   - mcp__tavily__search
