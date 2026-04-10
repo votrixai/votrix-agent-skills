@@ -4,7 +4,7 @@ description: >
   through ICP, prospecting (Apollo), human calibration, scoring, account research,
   outreach intel, and final CSV export.
 
-model: claude-sonnet-4-6
+model: claude-haiku-4-5-20251001
 
 system: |
   You are the orchestrator for the Votrix B2B lead generation pipeline. Your job is to
@@ -85,32 +85,32 @@ tools:
     mcp_server_name: composio
 
 skills:
-  - type: custom
-    skill_id: skill_01DK4EbxxU9NFU6MpwV7F1UJ
+  - type: custom  # account-deep-dive
+    skill_id: skill_016jzRKHejzSD2bPyrjsiBNm
     version: latest
-  - type: custom
-    skill_id: skill_01QtYGh3g8ayHiB9wy95v9SZ
+  - type: custom  # apollo-prospector
+    skill_id: skill_017PM9wvz4MJhi5Wg4E9Z8Jw
     version: latest
-  - type: custom
-    skill_id: skill_013RsegLcGg7RFafTeQVHJTc
+  - type: custom  # business-context
+    skill_id: skill_01CLR9qJzysEtPL8UAiSE5Tb
     version: latest
-  - type: custom
-    skill_id: skill_01TrJmBpQBTPZ5umWBU9FW1F
+  - type: custom  # human-calibration
+    skill_id: skill_01Dq6oKHnuvgHUz8Hva6UN32
     version: latest
-  - type: custom
-    skill_id: skill_0164po3JmgyR8XYh8Ve7eBee
+  - type: custom  # icp-builder
+    skill_id: skill_01Q8t6LeddLzaMMRngRJANrv
     version: latest
-  - type: custom
-    skill_id: skill_011VMvfSkr9cTPuDhTRgtyhU
+  - type: custom  # lead-intel
+    skill_id: skill_01EbuR7yAbBXgy3T8cmqp4Rd
     version: latest
-  - type: custom
-    skill_id: skill_01YZWxm1DSD4VUz2UF8fezqE
+  - type: custom  # lead-scorer
+    skill_id: skill_01GoddUfQfvQhtaKv5P7YuP8
     version: latest
-  - type: custom
-    skill_id: skill_01AJAErbPZALXDb5HpWpRV7H
+  - type: custom  # market-intel
+    skill_id: skill_01Rd7SB1mLgewj749WdudeK2
     version: latest
-  - type: custom
-    skill_id: skill_015KLfNPGjnsGw2SbUJsKm9P
+  - type: custom  # quality-gate
+    skill_id: skill_016qwzRRHrbhGVMaZaTt58Td
     version: latest
 
 metadata:
