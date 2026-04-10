@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campaign Intelligence",
+  "description": "Per-lead intelligence and campaign-level summary for outreach",
+  "type": "object",
+  "required": ["campaign_name", "company_scale", "leads", "generated_at"],
+  "properties": {
+    "campaign_name": { "type": "string" },
+    "company_scale": {
+      "type": "string",
+      "enum": ["smb", "mid", "enterprise"]
+    },
+    "leads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lead_id", "pain_signal"],
+        "properties": {
+          "lead_id": { "type": "string" },
+          "first_name": { "type": "string" },
+          "last_name": { "type": "string" },
+          "company_name": { "type": "string" },
+          "title": { "type": "string" },
+          "pain_signal": {
+            "type": "string",
+            "description": "SMB: question format. Mid/Enterprise: detailed pain hypothesis"
+          },
+          "lead_intel": {
+            "type": "string",
+            "description": "Mid+: 2-3 sentence personalized insight"
+          },
+          "email_subject": {
+            "type": "string",
+            "description": "Mid+: Suggested email subject line"
+          },
+          "email_opening": {
+            "type": "string",
+            "description": "Mid+: First 1-2 sentences of personalized email"
+          },
+          "trigger_detail": {
+            "type": "string",
+            "description": "Enterprise: Specific trigger event driving outreach timing"
+          },
+          "email_cta": {
+            "type": "string",
+            "description": "Enterprise: Tailored call-to-action"
+          },
+          "account_research": {
+            "type": "object",
+            "properties": {
+              "recent_news": { "type": "array", "items": { "type": "string" } },
+              "tech_stack": { "type": "array", "items": { "type": "string" } },
+              "hiring_signals": { "type": "array", "items": { "type": "string" } },
+              "financial_signals": { "type": "array", "items": { "type": "string" } }
+            },
+            "description": "Mid+: Deep dive research on the account"
+          }
+        }
+      }
+    },
+    "campaign_summary": {
+      "type": "object",
+      "properties": {
+        "total_leads": { "type": "integer" },
+        "qualified_leads": { "type": "integer" },
+        "tier_breakdown": {
+          "type": "object",
+          "properties": {
+            "A": { "type": "integer" },
+            "B": { "type": "integer" },
+            "C": { "type": "integer" },
+            "pass": { "type": "integer" },
+            "fail": { "type": "integer" }
+          }
+        },
+        "top_industries": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "top_titles": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "api_credits_used": {
+          "type": "object",
+          "properties": {
+            "apollo": { "type": "integer" },
+            "tavily": { "type": "integer" },
+            "firecrawl": { "type": "integer" },
+            "proxycurl": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

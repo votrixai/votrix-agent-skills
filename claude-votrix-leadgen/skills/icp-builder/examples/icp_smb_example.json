@@ -1,0 +1,29 @@
+{
+  "company_scale": "smb",
+  "industries": ["SaaS", "Technology", "Marketing Technology"],
+  "employee_range": { "min": 20, "max": 200 },
+  "revenue_range": { "min": "$1M", "max": "$50M" },
+  "personas": [
+    {
+      "title_patterns": ["VP of Sales", "Head of Sales", "Sales Director"],
+      "seniority": ["vp", "director"],
+      "departments": ["sales"]
+    },
+    {
+      "title_patterns": ["VP of Marketing", "Head of Growth", "Marketing Director"],
+      "seniority": ["vp", "director"],
+      "departments": ["marketing"]
+    }
+  ],
+  "geo": {
+    "countries": ["United States"],
+    "regions": ["California", "New York", "Texas"]
+  },
+  "technologies": ["Salesforce", "HubSpot"],
+  "exclusions": {
+    "companies": ["Competitor Corp"],
+    "domains": ["competitor.com"],
+    "industries": ["Government"]
+  },
+  "lead_volume_target": 100
+}

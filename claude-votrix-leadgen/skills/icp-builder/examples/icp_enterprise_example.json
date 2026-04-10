@@ -1,0 +1,28 @@
+{
+  "company_scale": "enterprise",
+  "industries": ["Healthcare", "Pharmaceutical", "Life Sciences"],
+  "employee_range": { "min": 5000, "max": null },
+  "revenue_range": { "min": "$1B", "max": null },
+  "personas": [
+    {
+      "title_patterns": ["Chief Digital Officer", "CTO", "SVP of Digital Transformation"],
+      "seniority": ["c_suite"],
+      "departments": ["technology", "digital"]
+    },
+    {
+      "title_patterns": ["VP of IT", "VP of Infrastructure", "Director of Cloud"],
+      "seniority": ["vp", "director"],
+      "departments": ["IT", "infrastructure"]
+    }
+  ],
+  "geo": {
+    "countries": ["United States"]
+  },
+  "technologies": ["Epic", "Cerner", "Salesforce Health Cloud"],
+  "exclusions": {
+    "companies": [],
+    "domains": [],
+    "industries": []
+  },
+  "lead_volume_target": 50
+}

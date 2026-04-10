@@ -1,0 +1,26 @@
+{
+  "smb": {
+    "employee_range": { "min": 10, "max": 200 },
+    "lead_volume_target": 100,
+    "suggested_seniority": ["manager", "director", "vp"],
+    "calibration_sample_size": 50,
+    "scoring_batch_size": 50,
+    "notes": "SMB campaigns optimize for volume. Pass/fail scoring keeps things fast."
+  },
+  "mid": {
+    "employee_range": { "min": 200, "max": 2000 },
+    "lead_volume_target": 75,
+    "suggested_seniority": ["director", "vp", "c_suite"],
+    "calibration_sample_size": 50,
+    "scoring_batch_size": 30,
+    "notes": "Mid-market balances volume with depth. 3D scoring (Fit/Intent/Timing)."
+  },
+  "enterprise": {
+    "employee_range": { "min": 2000, "max": null },
+    "lead_volume_target": 50,
+    "suggested_seniority": ["vp", "c_suite"],
+    "calibration_sample_size": 30,
+    "scoring_batch_size": 20,
+    "notes": "Enterprise campaigns prioritize quality. 4D scoring with full enrichment."
+  }
+}

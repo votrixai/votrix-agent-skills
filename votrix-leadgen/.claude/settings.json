@@ -4,27 +4,10 @@
   },
   "mcpServers": {
     "composio": {
-      "url": "http://localhost:8000/mcp"
-    },
-    "tavily": {
-      "command": "npx",
-      "args": ["-y", "tavily-mcp@latest"],
-      "env": {
-        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
-      }
-    },
-    "firecrawl": {
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp@latest"],
-      "env": {
-        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
-      }
-    },
-    "proxycurl": {
-      "command": "npx",
-      "args": ["-y", "proxycurl-mcp@latest"],
-      "env": {
-        "PROXYCURL_API_KEY": "${PROXYCURL_API_KEY}"
+      "type": "http",
+      "url": "https://backend.composio.dev/tool_router/trs_fnNR_Ng7dm0y/mcp",
+      "headers": {
+        "x-api-key": "${COMPOSIO_API_KEY}"
       }
     }
   }

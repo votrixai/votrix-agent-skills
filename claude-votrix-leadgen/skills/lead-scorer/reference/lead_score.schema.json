@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lead Score",
+  "description": "Scoring output attached to each lead record",
+  "type": "object",
+  "required": ["lead_id", "verdict", "score_mode"],
+  "properties": {
+    "lead_id": { "type": "string" },
+    "score_mode": {
+      "type": "string",
+      "enum": ["smb_pass_fail", "mid_3d", "enterprise_4d"],
+      "description": "Scoring mode used based on company_scale"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["pass", "fail", "A", "B", "C"],
+      "description": "SMB: pass/fail. Mid/Enterprise: A/B/C tier"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Composite score (mid/enterprise only)"
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "fit": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "rationale": { "type": "string" }
+          }
+        },
+        "intent": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "rationale": { "type": "string" }
+          }
+        },
+        "timing": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "rationale": { "type": "string" }
+          }
+        },
+        "authority": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "rationale": { "type": "string" }
+          },
+          "description": "Enterprise 4D only"
+        }
+      }
+    },
+    "rejection_reason": {
+      "type": "string",
+      "description": "Why the lead was rejected (SMB fail or C-tier)"
+    },
+    "scoring_notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

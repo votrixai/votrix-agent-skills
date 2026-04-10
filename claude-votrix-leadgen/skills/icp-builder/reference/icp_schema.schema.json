@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ICP Schema",
+  "description": "Ideal Customer Profile defining target companies and personas",
+  "type": "object",
+  "required": ["company_scale", "industries", "personas", "geo"],
+  "properties": {
+    "company_scale": {
+      "type": "string",
+      "enum": ["smb", "mid", "enterprise"],
+      "description": "Target company size tier — drives scoring and intel modes"
+    },
+    "industries": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Target industries (e.g., 'SaaS', 'Healthcare', 'FinTech')"
+    },
+    "employee_range": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "integer", "minimum": 1 },
+        "max": { "type": "integer" }
+      },
+      "required": ["min"]
+    },
+    "revenue_range": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "string" },
+        "max": { "type": "string" }
+      },
+      "description": "Revenue range (e.g., '$1M', '$50M')"
+    },
+    "personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title_patterns", "seniority"],
+        "properties": {
+          "title_patterns": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Job title patterns to search (e.g., 'VP of Marketing', 'Head of Growth')"
+          },
+          "seniority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["c_suite", "vp", "director", "manager", "senior", "entry"]
+            }
+          },
+          "departments": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Target departments (e.g., 'marketing', 'engineering')"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "geo": {
+      "type": "object",
+      "properties": {
+        "countries": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "regions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["countries"]
+    },
+    "technologies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Technologies the target companies use"
+    },
+    "exclusions": {
+      "type": "object",
+      "properties": {
+        "companies": { "type": "array", "items": { "type": "string" } },
+        "domains": { "type": "array", "items": { "type": "string" } },
+        "industries": { "type": "array", "items": { "type": "string" } }
+      },
+      "description": "Explicit exclusion filters"
+    },
+    "lead_volume_target": {
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 1000,
+      "description": "Desired number of qualified leads"
+    }
+  },
+  "additionalProperties": false
+}
