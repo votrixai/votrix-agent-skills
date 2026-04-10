@@ -1,6 +1,6 @@
 ---
 name: account-deep-dive
-description: Deep research on top-scored accounts (A and B tier) using the Tavily MCP server for search and Firecrawl MCP server for scraping. Enriches leads with company news, tech stack, hiring signals, and financial signals. Mid-market and enterprise only — skip for SMB.
+description: Deep research on top-scored accounts (A and B tier) using Tavily for search and Firecrawl for scraping via Composio. Enriches leads with company news, tech stack, hiring signals, and financial signals. Mid-market and enterprise only — skip for SMB.
 ---
 
 # Account Deep Dive
@@ -17,12 +17,14 @@ Performs deep research on top-scored accounts (A and B tier) to enrich leads wit
 
 - `scored_leads.json` must exist in the campaign directory.
 - `pipeline_state.json` must exist with `company_scale` set to `"mid"` or `"enterprise"`.
-- Tavily and Firecrawl MCP servers must be attached to the agent.
+- The Composio MCP server must be attached to the agent.
 
-## Tools
+## Tools (via Composio)
 
-- **Tavily MCP server** — company news, tech stack, hiring signals, financial data
-- **Firecrawl MCP server** — deep content from specific pages (blogs, press releases, job boards)
+Access Tavily and Firecrawl through Composio's meta-tools. Call `COMPOSIO_SEARCH_TOOLS` to discover tool slugs, ensure connections via `COMPOSIO_MANAGE_CONNECTIONS`, then execute via `COMPOSIO_MULTI_EXECUTE_TOOL`.
+
+- **Tavily** — company news, tech stack, hiring signals, financial data
+- **Firecrawl** — deep content from specific pages (blogs, press releases, job boards)
 
 ## Data Operations
 
@@ -59,22 +61,22 @@ jq '.completed_steps += [5] | .current_step = 5 | .credits_used.tavily += $t | .
 
 For each unique company in the A/B lead set:
 
-4. **Company news search** (Tavily MCP):
+4. **Company news search** (Tavily via Composio):
    - `"{company_name} news {current_year}"`
    - `"{company_name} funding announcement"`
    - `"{company_name} expansion hiring"`
    - Extract: recent headlines, funding events, expansion signals.
 
-5. **Tech stack research** (Tavily MCP + Firecrawl MCP):
+5. **Tech stack research** (Tavily + Firecrawl via Composio):
    - `"{company_name} technology stack"`
-   - If a high-value result appears, scrape it via the Firecrawl MCP server.
+   - If a high-value result appears, scrape it via the Firecrawl tool using `COMPOSIO_MULTI_EXECUTE_TOOL`.
    - Extract: current technologies, recent tech changes.
 
-6. **Hiring signals** (Tavily MCP):
+6. **Hiring signals** (Tavily via Composio):
    - `"{company_name} hiring {relevant_department}"`
    - Extract: open roles, team growth indicators.
 
-7. **Financial signals** (Tavily MCP):
+7. **Financial signals** (Tavily via Composio):
    - `"{company_name} revenue growth OR funding"`
    - Extract: funding rounds, revenue milestones, financial health.
 

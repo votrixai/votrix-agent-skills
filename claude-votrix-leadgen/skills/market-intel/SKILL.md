@@ -1,6 +1,6 @@
 ---
 name: market-intel
-description: Research the target market — industry trends, competitor intelligence, and buying triggers — using the Tavily MCP server for search and Firecrawl MCP server for scraping. Invoke this for mid-market and enterprise campaigns after icp-builder. Skip for SMB.
+description: Research the target market — industry trends, competitor intelligence, and buying triggers — using Tavily for search and Firecrawl for scraping via Composio. Invoke this for mid-market and enterprise campaigns after icp-builder. Skip for SMB.
 ---
 
 # Market Intelligence
@@ -16,14 +16,18 @@ Builds a market knowledge base by researching industry trends, competitor positi
 ## Prerequisites
 
 - `business_context.json` and `icp_schema.json` must exist in the campaign directory.
-- The Tavily and Firecrawl MCP servers must be attached to the agent.
+- The Composio MCP server must be attached to the agent.
 
-## Tools
+## Tools (via Composio)
 
-- **Tavily MCP server** — search tool. Pass a query string, receive structured results (title, URL, content snippet, relevance score).
-- **Firecrawl MCP server** — scrape tool. Pass a URL, receive markdown content of the page.
+Access Tavily and Firecrawl through Composio's meta-tools:
 
-Use whichever tool names each MCP server exposes at runtime.
+1. **Discover tools.** Call `COMPOSIO_SEARCH_TOOLS` with queries like `{"use_case": "search the web with Tavily"}` and `{"use_case": "scrape a URL with Firecrawl"}`.
+2. **Ensure connections.** If no active connection exists, call `COMPOSIO_MANAGE_CONNECTIONS` with `{"toolkits": ["tavily", "firecrawl"]}`.
+3. **Execute.** Call `COMPOSIO_MULTI_EXECUTE_TOOL` with the discovered tool slugs.
+
+- **Tavily** — search tool. Pass a query string, receive structured results (title, URL, content snippet, relevance score).
+- **Firecrawl** — scrape tool. Pass a URL, receive markdown content of the page.
 
 ## Data Operations
 
@@ -60,9 +64,9 @@ jq '.completed_steps += [2] | .current_step = 2 | .credits_used.tavily += $t | .
    - Buying trigger queries (2–3 based on pain points)
    - Technology adoption queries (1–2 based on tech stack)
 
-3. **Execute Tavily searches** for each query via the Tavily MCP server. Parse results for relevant insights. Track the number of searches made.
+3. **Execute Tavily searches** for each query via `COMPOSIO_MULTI_EXECUTE_TOOL` using the Tavily tool slug. Parse results for relevant insights. Track the number of searches made.
 
-4. **Deep scrape key pages.** For high-value results, use the Firecrawl MCP server to extract full content:
+4. **Deep scrape key pages.** For high-value results, use the Firecrawl tool via `COMPOSIO_MULTI_EXECUTE_TOOL` to extract full content:
    - Competitor pricing / feature pages
    - Industry report landing pages
    - Relevant news articles

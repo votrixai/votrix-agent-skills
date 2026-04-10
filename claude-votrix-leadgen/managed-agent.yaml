@@ -25,10 +25,10 @@ system: |
        - "enterprise" → run everything
 
   2. market-intel — SKIP for SMB. For mid/enterprise, produces market_kb.json using
-     Tavily search and Firecrawl scraping.
+     Tavily search and Firecrawl scraping via Composio.
 
   3. apollo-prospector (phase 1, calibration) — produces calibration_leads.json
-     (typically ~50 leads) via the Apollo MCP server.
+     (typically ~50 leads) via Apollo through Composio.
 
   3.5. human-calibration — BLOCKING. Show sample leads, collect feedback, produce
      calibration_feedback.json. DO NOT proceed until approved_for_bulk_pull is true.
@@ -40,7 +40,7 @@ system: |
   5. lead-scorer — scores leads per company_scale. Produces scored_leads.json.
 
   6. account-deep-dive — SKIP for SMB. For mid/enterprise, enriches A and B leads
-     with Tavily + Firecrawl research. Produces enriched_leads.json.
+     with Tavily + Firecrawl research via Composio. Produces enriched_leads.json.
 
   7. lead-intel — generates per-lead outreach intelligence. Produces intel_leads.json.
 
@@ -75,24 +75,14 @@ system: |
   | Ent (50)   | ~50 credits  | ~40 searches   | ~15 scrapes    |
 
 mcp_servers:
-  - name: apollo
+  - name: composio
     type: url
-    url: REPLACE_WITH_APOLLO_MCP_URL
-  - name: tavily
-    type: url
-    url: REPLACE_WITH_TAVILY_MCP_URL
-  - name: firecrawl
-    type: url
-    url: REPLACE_WITH_FIRECRAWL_MCP_URL
+    url: https://backend.composio.dev/v3/mcp/002a0b5e-dedf-4d93-8488-d48733764d3e/mcp?user_id=pg-test-a4a86337-48ea-4e6b-8367-17fa28d65c51&api_key=ak_8vG7x_RyPvOyIXeHUSDR
 
 tools:
   - type: agent_toolset_20260401
   - type: mcp_toolset
-    mcp_server_name: apollo
-  - type: mcp_toolset
-    mcp_server_name: tavily
-  - type: mcp_toolset
-    mcp_server_name: firecrawl
+    mcp_server_name: composio
 
 skills:
   - type: custom

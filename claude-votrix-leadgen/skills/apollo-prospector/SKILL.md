@@ -1,6 +1,6 @@
 ---
 name: apollo-prospector
-description: Search Apollo.io for leads matching the ICP via the Apollo MCP server. Two phases — calibration pull (small sample for human review) first, then bulk pull after the user approves the calibration. Invoke when icp_schema.json exists and leads need to be sourced.
+description: Search Apollo.io for leads matching the ICP via Composio. Two phases — calibration pull (small sample for human review) first, then bulk pull after the user approves the calibration. Invoke when icp_schema.json exists and leads need to be sourced.
 ---
 
 # Apollo Prospector
@@ -10,12 +10,17 @@ Pulls leads from Apollo.io based on the ICP schema. Uses a two-phase approach: *
 ## Prerequisites
 
 - `icp_schema.json` must exist in the campaign directory.
-- The Apollo MCP server must be attached to the agent.
+- The Composio MCP server must be attached to the agent.
 
-## Apollo Integration
+## Apollo Integration via Composio
 
-Apollo.io is accessed directly through its MCP server. Use whichever tool names the server exposes at runtime. Expected actions:
+Apollo.io is accessed through Composio's meta-tools. Follow this workflow:
 
+1. **Discover tools.** Call `COMPOSIO_SEARCH_TOOLS` with queries like `{"use_case": "search people on Apollo"}`. This returns the exact tool slugs and input schemas.
+2. **Ensure connection.** If `COMPOSIO_SEARCH_TOOLS` indicates no active Apollo connection, call `COMPOSIO_MANAGE_CONNECTIONS` with `{"toolkits": ["apollo"]}` and complete auth.
+3. **Execute.** Call `COMPOSIO_MULTI_EXECUTE_TOOL` with the discovered tool slugs and arguments.
+
+Expected Apollo actions (actual tool slugs discovered at runtime):
 - **People search** — search for contacts by title, seniority, company size, industry, location
 - **Organization search** — look up company details
 - **Contact enrichment** — get email / phone data
@@ -90,7 +95,7 @@ jq '.completed_steps += [3] | .current_step = 3 | .credits_used.apollo += $credi
 
 3. **Save query params.** Write `apollo_query_params.json` via jq for audit trail.
 
-4. **Execute calibration pull.** Call the Apollo MCP people search tool with `limit` set to the calibration sample size (typically 50).
+4. **Execute calibration pull.** Use `COMPOSIO_SEARCH_TOOLS` to discover the Apollo people search tool, then call it via `COMPOSIO_MULTI_EXECUTE_TOOL` with `limit` set to the calibration sample size (typically 50).
 
 5. **Transform and save.** Use jq to map the response to lead_record schema and write to `calibration_leads.json`.
 
@@ -102,7 +107,7 @@ jq '.completed_steps += [3] | .current_step = 3 | .credits_used.apollo += $credi
 
 2. **Adjust search.** Use jq to merge feedback adjustments into query params.
 
-3. **Execute bulk pull.** Call Apollo MCP people search with the full `lead_volume_target` limit. Paginate if needed.
+3. **Execute bulk pull.** Call the Apollo people search tool via `COMPOSIO_MULTI_EXECUTE_TOOL` with the full `lead_volume_target` limit. Paginate if needed.
 
 4. **Deduplicate.** Use jq to remove leads already in `calibration_leads.json` (match on `lead_id`).
 
